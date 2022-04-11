@@ -2,7 +2,7 @@ import React from "react";
 import { useUI } from "../context/ui.context";
 
 const Home = () => {
-  const { setModalView, openModal, closeModal } = useUI();
+  const { openModal } = useUI();
 
   return (
     <React.Fragment>

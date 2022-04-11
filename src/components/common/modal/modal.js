@@ -7,11 +7,27 @@ import {
   clearAllBodyScrollLocks
 } from "body-scroll-lock";
 import { useUI } from "../../../context/ui.context";
+import { Col, Row } from "reactstrap";
+import useOnClickOutside from "../../../utils/use-click-outside";
 
 const Modal = ({ children, open, onClose }) => {
   const { closeModal } = useUI();
-  const modalRootRef = React.useRef();
+  // const modalRootRef = React.useRef();
   const modalInnerRef = React.useRef();
+  useOnClickOutside(modalInnerRef, () => closeModal());
+
+  React.useEffect(() => {
+    if (modalInnerRef.current) {
+      if (open) {
+        disableBodyScroll(modalInnerRef.current);
+      } else {
+        enableBodyScroll(modalInnerRef.current);
+      }
+    }
+    return () => {
+      clearAllBodyScrollLocks();
+    };
+  }, [open]);
   return (
     <Portal>
       {open && (
@@ -26,7 +42,11 @@ const Modal = ({ children, open, onClose }) => {
             background: "rgba(0,0,0, .50)"
           }}
         >
-          {children}
+          <Row className="h-100">
+            <Col className="d-flex justify-content-center align-items-center">
+              <div ref={modalInnerRef}>{children}</div>
+            </Col>
+          </Row>
         </div>
       )}
     </Portal>

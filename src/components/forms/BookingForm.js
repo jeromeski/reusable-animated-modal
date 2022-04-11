@@ -1,26 +1,27 @@
 import React from "react";
+import { Form, FormGroup } from "reactstrap";
 import { useUI } from "../../context/ui.context";
-import Card from "../common/card";
+import ReservationCard from "../ReservationCard";
 
 const BookingForm = () => {
   const { closeModal } = useUI();
   return (
-    <Card>
-      <form>
-        <div>
+    <ReservationCard title="Reservation Form">
+      <Form>
+        <FormGroup>
           <input type="text" name="fullName" placeholder="Enter Full Name" />
-        </div>
-        <div>
+        </FormGroup>
+        <FormGroup>
           <input type="email" name="email" placeholder="Enter Email" />
-        </div>
-        <div>
+        </FormGroup>
+        <FormGroup>
           <input type="text" name="phone" placeholder="Enter Phone Number" />
-        </div>
-      </form>
+        </FormGroup>
+      </Form>
       <button type="button" onClick={() => closeModal()}>
         Cancel
       </button>
-    </Card>
+    </ReservationCard>
   );
 };
 
