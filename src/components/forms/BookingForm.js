@@ -1,5 +1,5 @@
 import React from "react";
-import { Form, FormGroup } from "reactstrap";
+import { Form, FormGroup, Input, Label } from "reactstrap";
 import { useUI } from "../../context/ui.context";
 import ReservationCard from "../ReservationCard";
 
@@ -9,13 +9,19 @@ const BookingForm = () => {
     <ReservationCard title="Reservation Form">
       <Form>
         <FormGroup>
-          <input type="text" name="fullName" placeholder="Enter Full Name" />
-        </FormGroup>
-        <FormGroup>
-          <input type="email" name="email" placeholder="Enter Email" />
-        </FormGroup>
-        <FormGroup>
-          <input type="text" name="phone" placeholder="Enter Phone Number" />
+          <Label tag="div">
+            Name <Input type="text" placeholder="Enter Full Name" />
+          </Label>
+
+          <Label tag="div">
+            Email
+            <Input type="email" placeholder="Enter Email" />
+          </Label>
+
+          <Label tag="div">
+            Phone
+            <Input type="text" placeholder="Enter Phone" />
+          </Label>
         </FormGroup>
       </Form>
       <button type="button" onClick={() => closeModal()}>

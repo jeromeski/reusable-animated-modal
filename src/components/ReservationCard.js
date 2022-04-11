@@ -3,8 +3,8 @@ import { Card, CardBody, CardHeader, CardTitle } from "reactstrap";
 const ReservationCard = ({ title, children }) => {
   return (
     <Card>
-      <CardHeader>{title}</CardHeader>
-      <CardBody>{children}</CardBody>
+      <CardHeader tag="h6">{title}</CardHeader>
+      <CardBody className="p-4">{children}</CardBody>
     </Card>
   );
 };
