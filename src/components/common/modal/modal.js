@@ -9,10 +9,11 @@ import {
 import { useUI } from "../../../context/ui.context";
 import { Col, Row } from "reactstrap";
 import useOnClickOutside from "../../../utils/use-click-outside";
+import { fadeInOut } from "../../../utils/motion/use-fade-in-out";
 
 const Modal = ({ children, open, onClose }) => {
   const { closeModal } = useUI();
-  // const modalRootRef = React.useRef();
+  const modalRootRef = React.useRef();
   const modalInnerRef = React.useRef();
   useOnClickOutside(modalInnerRef, () => closeModal());
 
@@ -30,25 +31,26 @@ const Modal = ({ children, open, onClose }) => {
   }, [open]);
   return (
     <Portal>
-      {open && (
-        <div
-          style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            width: "100%",
-            height: "100vh",
-            padding: 20,
-            background: "rgba(0,0,0, .50)"
-          }}
-        >
-          <Row className="h-100">
-            <Col className="d-flex justify-content-center align-items-center">
-              <div ref={modalInnerRef}>{children}</div>
-            </Col>
-          </Row>
-        </div>
-      )}
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            ref={modalRootRef}
+            key="modal"
+            initial="from"
+            animate="to"
+            exit="from"
+            variants={fadeInOut(0.25)}
+          >
+            <div className="modal-base">
+              <Row className="h-100">
+                <Col className="d-flex justify-content-center align-items-center">
+                  <div ref={modalInnerRef}>{children}</div>
+                </Col>
+              </Row>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </Portal>
   );
 };
