@@ -40,6 +40,7 @@ const Modal = ({ children, open, onClose }) => {
             animate="to"
             exit="from"
             variants={fadeInOut(0.25)}
+            className="motion-div"
           >
             <div className="modal-base">
               <Row className="h-100">
